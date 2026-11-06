@@ -1,7 +1,7 @@
 # linux-administration-writeup
 An ongoing writeup of my learning of RHEL 9 or Rocky Linux for system administration
 
-## Lab 1: Hardened Apache Web Directory:
+## Lab 1: Hardened Apache Web Directory: <br>
 **Goal** Configure a web server with a nonstandard web root ("/company_site") for apache httpd
 **Core Commands Used**
 chown -R apache:apache /company_site
