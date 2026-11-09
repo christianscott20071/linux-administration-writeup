@@ -13,12 +13,22 @@ restorecon -Rv /company_site <br>
 **Notes:** <br>
 <br>
 <br>
-## Lab 2: Changed port with SELinux and firewall security: <br>
-**Goal** Change the port that our server listens on and modify SELinux and change firewall rules to accept it. <br>
+## Lab 2: Changed port with SELinux: <br>
+**Goal** Change the port that our server listens on and modify SELinux rules to accept it. <br>
 **Core Commands Used** <br>
 sudo nano /etc/httpd/conf/httpd.conf <br>
-*Change the listening port from 80 to whatever you want to listen on, for this lab we will use 8080* <br>
+*Change the listening port from 80 to whatever you want to listen on, for this lab we will use 8070* <br>
+sudo semanage port -a -t http_port_t -p tcp 8070 <br>
+*Tells SELinux to add a port to the http_port_t label and specifies it as tcp and port 8070* <br>
 **Notes** <br>
-Make sure to restart apache with "sudo systemctl restart httpd" after changing the port
+Make sure to restart apache with "sudo systemctl restart httpd" after changing the port <br>
+
+## Lab 3: Modifying firewall access for a changed port <br>
+**Goal** Our last lab established internal access with localhost curling the site, but we still need to make it so external clients can make it past the firewall and access this port. We need to let our firewall accept requests through port 8070 <br>
+**Core Commands Used** <br>
+sudo firewalld-cmd --permanent --add-port=8070/tcp
+sudo firewalld-cmd --reload 
+sudo firewalld-cmd --list-ports
+*Confirms what ports are available*
 
 
