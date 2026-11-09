@@ -26,9 +26,9 @@ Make sure to restart apache with "sudo systemctl restart httpd" after changing t
 ## Lab 3: Modifying firewall access for a changed port <br>
 **Goal** Our last lab established internal access with localhost curling the site, but we still need to make it so external clients can make it past the firewall and access this port. We need to let our firewall accept requests through port 8070 <br>
 **Core Commands Used** <br>
-sudo firewalld-cmd --permanent --add-port=8070/tcp
-sudo firewalld-cmd --reload 
-sudo firewalld-cmd --list-ports
-*Confirms what ports are available*
+sudo firewalld-cmd --permanent --add-port=8070/tcp <br>
+sudo firewalld-cmd --reload <br>
+sudo firewalld-cmd --list-ports <br>
+*Confirms what ports are available* <br>
 
 
