@@ -22,7 +22,8 @@ sudo semanage port -a -t http_port_t -p tcp 8070 <br>
 *Tells SELinux to add a port to the http_port_t label and specifies it as tcp and port 8070* <br>
 **Notes** <br>
 Make sure to restart apache with "sudo systemctl restart httpd" after changing the port <br>
-
+<br>
+<br>
 ## Lab 3: Modifying firewall access for a changed port <br>
 **Goal** Our last lab established internal access with localhost curling the site, but we still need to make it so external clients can make it past the firewall and access this port. We need to let our firewall accept requests through port 8070 <br>
 **Core Commands Used** <br>
@@ -30,5 +31,21 @@ sudo firewalld-cmd --permanent --add-port=8070/tcp <br>
 sudo firewalld-cmd --reload <br>
 sudo firewalld-cmd --list-ports <br>
 *Confirms what ports are available* <br>
-
-
+<br>
+<br>
+## Lab 4: Apache Virtual Hosts (Multi-Domain web hosting) <br>
+**Goal** We now want to set up a couple different independent websites assigned to the non default roots <br>
+**Core Commands Used** <br>
+sudo mkdir /var/www/site1 /var/www/site2 <br>
+*Makes two different websites on non default roots* <br>
+sudo semanage fcontext -a -t httpd_sys_content_t "/var/www/site1(/.*)?" <br>
+*Registers these file paths with Apache*<br>
+sudo restorecon -Rv /var/www/<br>
+*Updates SELinux security context labels to the new directories* <br>
+sudo nano /etc/httpd/conf.d/vhosts.conf <br>
+*Defines VirtualHost *:80 configuration blocks for domain based routing* <br>
+sudo nano /etc/hosts <br>
+*set site#.local for local testing* <br>
+**Notes:** <br>
+<br>
+<br>
